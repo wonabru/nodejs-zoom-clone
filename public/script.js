@@ -6,7 +6,7 @@ const myPeer = new Peer(undefined, {
   port: '30303'
 })
 
-const crypto = io('/crypto')
+const crypto = require('/crypto/crypto.js')
 
 const algorithm = 'aes-256-ecb'
 const password = '12345678901234567890123456789012'

@@ -1,7 +1,7 @@
 const express = require('express')
 const app = express()
 
-const crypto = require('crypto')
+const crypto = require('crypto.js')
 
 // const cors = require('cors')
 // app.use(cors())
@@ -28,7 +28,7 @@ app.use('/peerjs', peerServer);
 
 //crypto_str = JSON.stringify(crypto);
 
-app.set('/crypto', crypto)
+app.set('/crypto/crypto.js', crypto)
 
 app.set('view engine', 'ejs')
 app.use(express.static('public'))
