@@ -11,9 +11,9 @@ const crypto = io('/crypto')
 const algorithm = 'aes-256-ecb'
 const password = '12345678901234567890123456789012'
 
-//var encrypt = crypto.createCipher(algorithm, password)
+const encrypt = crypto.createCipher(algorithm, password)
 
-//var decrypt = crypto.createDecipher(algorithm, password)
+const decrypt = crypto.createDecipher(algorithm, password)
 
 //var crypto = require('crypto'),
 //    algorithm = 'aes-256-crt',
