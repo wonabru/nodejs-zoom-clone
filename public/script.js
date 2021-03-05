@@ -13,7 +13,7 @@ var iv = [ 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34,35, 36 ];
 
 var aesCbc = new aesjs.ModeOfOperation.cbc(key, iv);
 
-function enrypting(input) {
+function enrypting(aesCbc, input) {
 const output = DataStream.from(async function* () {
   while(true) {
     const data1 = await input.whenRead(16).readUInt8(0);
@@ -22,7 +22,7 @@ const output = DataStream.from(async function* () {
 }).catch(e => output.end());
 }
 
-function decrypting(input) {
+function decrypting(aesCbc, input) {
 const output = DataStream.from(async function* () {
   while(true) {
     const data1 = await input.whenRead(16).readUInt8(0);
@@ -48,12 +48,12 @@ navigator.mediaDevices.getUserMedia({
   audio: true
 }).then(stream => {
   myVideoStream = stream;
-  addVideoStream(myVideo, enrypting(stream))
+  addVideoStream(myVideo, enrypting(aesCbc, stream))
   myPeer.on('call', call => {
     call.answer(stream)
     const video = document.createElement('video')
     call.on('stream', userVideoStream => {
-      addVideoStream(video, decrypting(userVideoStream))
+      addVideoStream(video, decrypting(aesCbc, userVideoStream))
     })
   })
 
