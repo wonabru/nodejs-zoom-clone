@@ -6,6 +6,10 @@ const myPeer = new Peer(undefined, {
   port: '30303'
 })
 
+var encrypt = app.settings.encrypt
+
+var decrypt = app.settings.decrypt
+
 //var crypto = require('crypto'),
 //    algorithm = 'aes-256-crt',
 //    password = '12345678901234567890123456789012';
