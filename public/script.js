@@ -2,7 +2,7 @@ const socket = io('/')
 const videoGrid = document.getElementById('video-grid')
 const myPeer = new Peer(undefined, {
   path: '/peerjs',
-  host: '/',
+  host: 'qc.wonabru.com/',
   port: '30303'
 })
 let myVideoStream;
