@@ -2,13 +2,24 @@ const express = require('express')
 const app = express()
 // const cors = require('cors')
 // app.use(cors())
-const server = require('http').Server(app)
+const https = require('https')
+const fs = require('fs')
+
+const httpsOptions = {
+    key: fs.readFileSync('./security/cert.key'),
+    cert: fs.readFileSync('./security/cert.pem')
+}
+const server = https.createServer(httpsOptions, app)
+
 const io = require('socket.io')(server)
 const { ExpressPeerServer } = require('peer');
+
 const peerServer = ExpressPeerServer(server, {
   debug: true
 });
 const { v4: uuidV4 } = require('uuid')
+
+const port = 30303
 
 app.use('/peerjs', peerServer);
 
@@ -39,4 +50,8 @@ io.on('connection', socket => {
   })
 })
 
-server.listen(process.env.PORT||3030)
+server.listen(port, () => {
+        console.log('server running at ' + port)
+    })
+
+// server.listen(process.env.PORT||8443)

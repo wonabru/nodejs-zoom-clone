@@ -1,0 +1,17 @@
+[req]
+distinguished_name = kwant_centauri
+x509_extensions = v3_req
+prompt = no
+[kwant_centauri]
+C = PL
+ST = MZ
+L = Location
+O = Quantum Communications
+OU = IT
+CN = qc.wonabru.com
+[v3_req]
+keyUsage = critical, digitalSignature, keyAgreement
+extendedKeyUsage = serverAuth
+subjectAltName = @alt_names
+[alt_names]
+DNS.1 = www.wonabru.com
