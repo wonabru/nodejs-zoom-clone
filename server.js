@@ -3,11 +3,7 @@ const app = express()
 
 const crypto = require('crypto')
 const algorithm = 'aes-256-ecb'
-const password = '12345678901234567890123456789012';
-
-var encrypt = crypto.createCipher(algorithm, password);
-
-var decrypt = crypto.createDecipher(algorithm, password);
+const password = '12345678901234567890123456789012'
 
 // const cors = require('cors')
 // app.use(cors())
