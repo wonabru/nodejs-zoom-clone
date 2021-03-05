@@ -1,8 +1,6 @@
 const express = require('express')
 const app = express()
 
-const crypto = require('crypto')
-
 // const cors = require('cors')
 // app.use(cors())
 const https = require('https')
@@ -13,8 +11,6 @@ const httpsOptions = {
     cert: fs.readFileSync('./security/cert.pem')
 }
 const server = https.createServer(httpsOptions, app)
-
-
 
 const io = require('socket.io')(server)
 const { ExpressPeerServer } = require('peer');
@@ -27,10 +23,6 @@ const { v4: uuidV4 } = require('uuid')
 const port = 30303
 
 app.use('/peerjs', peerServer);
-
-//crypto_str = JSON.stringify(crypto);
-
-app.set('/crypto', crypto)
 
 app.set('view engine', 'ejs')
 app.use(express.static('public'))
