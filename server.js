@@ -2,8 +2,6 @@ const express = require('express')
 const app = express()
 
 const crypto = require('crypto')
-const algorithm = 'aes-256-ecb'
-const password = '12345678901234567890123456789012'
 
 // const cors = require('cors')
 // app.use(cors())
