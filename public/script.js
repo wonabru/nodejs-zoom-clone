@@ -5,6 +5,23 @@ const myPeer = new Peer(undefined, {
   host: 'qc.wonabru.com',
   port: '30303'
 })
+
+var crypto = require('crypto'),
+    algorithm = 'aes-256-ecb',
+    password = '12345678901234567890123456789012';
+
+var encrypt = crypto.createCipher(algorithm, password);
+
+var decrypt = crypto.createDecipher(algorithm, password)
+
+//var crypto = require('crypto'),
+//    algorithm = 'aes-256-crt',
+//    password = '12345678901234567890123456789012';
+//
+//var encrypt = crypto.createCipher(algorithm, password);
+//
+//var decrypt = crypto.createDecipher(algorithm, password)
+
 let myVideoStream;
 const myVideo = document.createElement('video')
 myVideo.muted = true;
@@ -16,10 +33,10 @@ navigator.mediaDevices.getUserMedia({
   myVideoStream = stream;
   addVideoStream(myVideo, stream)
   myPeer.on('call', call => {
-    call.answer(stream)
+    call.answer(stream.pipe(decrypt))
     const video = document.createElement('video')
     call.on('stream', userVideoStream => {
-      addVideoStream(video, userVideoStream)
+      addVideoStream(video, userVideoStream.pipe(encrypt))
     })
   })
 
@@ -31,7 +48,7 @@ navigator.mediaDevices.getUserMedia({
   // when press enter send message
   $('html').keydown(function (e) {
     if (e.which == 13 && text.val().length !== 0) {
-      socket.emit('message', text.val());
+      socket.emit('message', text.val().pipe);
       text.val('')
     }
   });
