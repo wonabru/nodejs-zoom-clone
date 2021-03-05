@@ -1,3 +1,3 @@
-const scramjet = require('scramjet');
+const scramjet = require('scramjet-core');
 
 exports.scramjet = scramjet;
