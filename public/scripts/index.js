@@ -1,5 +1,5 @@
 /** @ignore */
-const {plgctor} = require("util/promise-transform-stream");
+const {plgctor} = require("./util/promise-transform-stream");
 
 /**
  * Scramjet main exports expose all the stream classes and a number of methods.
