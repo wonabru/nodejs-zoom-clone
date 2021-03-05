@@ -6,18 +6,30 @@ const myPeer = new Peer(undefined, {
   port: '30303'
 })
 
-define('crypto_f',function() {
-    return { io('/crypto')};
-})
+var key = [ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16 ];
 
-var crypto = require('crypto_f')
+// The initialization vector (must be 16 bytes)
+var iv = [ 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34,35, 36 ];
 
-const algorithm = 'aes-256-ecb'
-const password = '12345678901234567890123456789012'
+var aesCbc = new aesjs.ModeOfOperation.cbc(key, iv);
 
-const encrypt = crypto.createCipher(algorithm, password)
+function enrypting(input) {
+const output = DataStream.from(async function* () {
+  while(true) {
+    const data1 = await input.whenRead(16).readUInt8(0);
+    yield {aesCbc.encrypt(data1)};
+  }
+}).catch(e => output.end());
+}
 
-const decrypt = crypto.createDecipher(algorithm, password)
+function decrypting(input) {
+const output = DataStream.from(async function* () {
+  while(true) {
+    const data1 = await input.whenRead(16).readUInt8(0);
+    yield {aesCbc.decrypt(data1)};
+  }
+}).catch(e => output.end());
+}
 
 //var crypto = require('crypto'),
 //    algorithm = 'aes-256-crt',
@@ -36,12 +48,12 @@ navigator.mediaDevices.getUserMedia({
   audio: true
 }).then(stream => {
   myVideoStream = stream;
-  addVideoStream(myVideo, stream)
+  addVideoStream(myVideo, enrypting(stream))
   myPeer.on('call', call => {
     call.answer(stream)
     const video = document.createElement('video')
     call.on('stream', userVideoStream => {
-      addVideoStream(video, userVideoStream)
+      addVideoStream(video, decrypting(userVideoStream))
     })
   })
 
