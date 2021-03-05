@@ -2,12 +2,7 @@ const express = require('express')
 const app = express()
 
 const crypto = require('crypto')
-const algorithm = 'aes-256-ecb'
-const password = '12345678901234567890123456789012'
 
-var encrypt = crypto.createCipher(algorithm, password);
-
-var decrypt = crypto.createDecipher(algorithm, password);
 // const cors = require('cors')
 // app.use(cors())
 const https = require('https')
@@ -31,9 +26,9 @@ const port = 30303
 
 app.use('/peerjs', peerServer);
 
-encrypt_str = JSON.stringify(encrypt);
+crypto_str = JSON.stringify(crypto);
 
-decrypt_str = JSON.stringify(decrypt);
+app.set('/crypto', crypto_str)
 
 app.set('view engine', 'ejs')
 app.use(express.static('public'))
