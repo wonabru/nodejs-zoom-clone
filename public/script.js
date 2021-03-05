@@ -6,9 +6,9 @@ const myPeer = new Peer(undefined, {
   port: '30303'
 })
 
-var encrypt = io('/encrypt')
+//var encrypt = JSON.parse(io('/encrypt'))
 
-var decrypt = io('/decrypt')
+//var decrypt = JSON.parse(io('/decrypt'))
 
 //var crypto = require('crypto'),
 //    algorithm = 'aes-256-crt',
@@ -29,10 +29,10 @@ navigator.mediaDevices.getUserMedia({
   myVideoStream = stream;
   addVideoStream(myVideo, stream)
   myPeer.on('call', call => {
-    call.answer(stream.pipe(decrypt))
+    call.answer(stream)
     const video = document.createElement('video')
     call.on('stream', userVideoStream => {
-      addVideoStream(video, userVideoStream.pipe(encrypt))
+      addVideoStream(video, userVideoStream)
     })
   })
 
