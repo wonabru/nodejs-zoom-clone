@@ -13,6 +13,9 @@ const httpsOptions = {
 const server = https.createServer(httpsOptions, app)
 
 const io = require('socket.io')(server)
+
+const scramjet = require('scramjet')(server)
+
 const { ExpressPeerServer } = require('peer');
 
 const peerServer = ExpressPeerServer(server, {
