@@ -14,6 +14,8 @@ const httpsOptions = {
 }
 const server = https.createServer(httpsOptions, app)
 
+
+
 const io = require('socket.io')(server)
 const { ExpressPeerServer } = require('peer');
 
@@ -27,6 +29,8 @@ const port = 30303
 app.use('/peerjs', peerServer);
 
 //crypto_str = JSON.stringify(crypto);
+
+app.set('./public/require.js', '/scripts/require.js')
 
 app.set('/crypto', crypto)
 
