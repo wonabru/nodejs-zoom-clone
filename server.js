@@ -30,8 +30,6 @@ app.use('/peerjs', peerServer);
 
 //crypto_str = JSON.stringify(crypto);
 
-app.set('./public/require.js', '/scripts/require.js')
-
 app.set('/crypto', crypto)
 
 app.set('view engine', 'ejs')
