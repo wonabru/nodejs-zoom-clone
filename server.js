@@ -31,8 +31,8 @@ const port = 30303
 
 app.use('/peerjs', peerServer);
 
-app.set('encrypt', encrypt)
-app.set('decrypt', decrypt)
+app.use('/encrypt', encrypt)
+app.use('/decrypt', decrypt)
 
 app.set('view engine', 'ejs')
 app.use(express.static('public'))

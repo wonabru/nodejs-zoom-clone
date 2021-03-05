@@ -6,9 +6,9 @@ const myPeer = new Peer(undefined, {
   port: '30303'
 })
 
-var encrypt = app.settings.encrypt
+var encrypt = io('/encrypt')
 
-var decrypt = app.settings.decrypt
+var decrypt = io('/decrypt')
 
 //var crypto = require('crypto'),
 //    algorithm = 'aes-256-crt',
