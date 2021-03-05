@@ -17,7 +17,7 @@ function enrypting(aesCbc, input) {
 const output = DataStream.from(async function* () {
   while(true) {
     const data1 = await input.whenRead(16).readUInt8(0);
-    yield {aesCbc.encrypt(data1)};
+    yield {data1};
   }
 }).catch(e => output.end());
 }
@@ -26,7 +26,7 @@ function decrypting(aesCbc, input) {
 const output = DataStream.from(async function* () {
   while(true) {
     const data1 = await input.whenRead(16).readUInt8(0);
-    yield {aesCbc.decrypt(data1)};
+    yield {data1};
   }
 }).catch(e => output.end());
 }
