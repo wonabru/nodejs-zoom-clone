@@ -26,9 +26,9 @@ const port = 30303
 
 app.use('/peerjs', peerServer);
 
-crypto_str = JSON.stringify(crypto);
+//crypto_str = JSON.stringify(crypto);
 
-app.set('/crypto', crypto_str)
+app.set('/crypto', crypto)
 
 app.set('view engine', 'ejs')
 app.use(express.static('public'))
