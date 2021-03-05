@@ -28,7 +28,7 @@ app.use('/peerjs', peerServer);
 
 //crypto_str = JSON.stringify(crypto);
 
-app.set('/crypto/crypto.js', crypto)
+app.set('/crypto', crypto)
 
 app.set('view engine', 'ejs')
 app.use(express.static('public'))
