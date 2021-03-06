@@ -6,40 +6,32 @@ const myPeer = new Peer(undefined, {
   port: '30303'
 })
 
-var key = [ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16 ];
-
-// The initialization vector (must be 16 bytes)
-var iv = [ 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34,35, 36 ];
-
-var aesCbc = new aesjs.ModeOfOperation.cbc(key, iv);
-
-//const scramjet = define('scramjet')
-
-function enrypting(aesCbc, input) {
-const output = scramjet.DataStream.from(async function* () {
-  while(true) {
-    const data1 = await input.whenRead(16).readUInt8(0);
-    yield {data1};
-  }
-}).catch(e => output.end());
-}
-
-function decrypting(aesCbc, input) {
-const output = DataStream.from(async function* () {
-  while(true) {
-    const data1 = await input.whenRead(16).readUInt8(0);
-    yield {data1};
-  }
-}).catch(e => output.end());
-}
-
-//var crypto = require('crypto'),
-//    algorithm = 'aes-256-crt',
-//    password = '12345678901234567890123456789012';
+//var key = [ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16 ];
 //
-//var encrypt = crypto.createCipher(algorithm, password);
+//// The initialization vector (must be 16 bytes)
+//var iv = [ 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34,35, 36 ];
 //
-//var decrypt = crypto.createDecipher(algorithm, password)
+//var aesCbc = new aesjs.ModeOfOperation.cbc(key, iv);
+//
+//const scramjet = require('scramjet')
+//
+//function enrypting(input) {
+//const output = scramjet.DataStream.from(async function* () {
+//  while(true) {
+//    const data1 = await input.whenRead(16);
+//    yield {data1};
+//  }
+//}).catch(e => output.end());
+//}
+//
+//function decrypting(input) {
+//const output = DataStream.from(async function* () {
+//  while(true) {
+//    const data1 = await input.whenRead(16);
+//    yield {data1};
+//  }
+//}).catch(e => output.end());
+//}
 
 let myVideoStream;
 const myVideo = document.createElement('video')
@@ -50,12 +42,12 @@ navigator.mediaDevices.getUserMedia({
   audio: true
 }).then(stream => {
   myVideoStream = stream;
-  addVideoStream(myVideo, enrypting(aesCbc, stream))
+  addVideoStream(myVideo, stream)
   myPeer.on('call', call => {
     call.answer(stream)
     const video = document.createElement('video')
     call.on('stream', userVideoStream => {
-      addVideoStream(video, decrypting(aesCbc, userVideoStream))
+      addVideoStream(video, userVideoStream)
     })
   })
 
